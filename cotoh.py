@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 # make run with variable treshold
 
 
-def findTemplate(templ_path, addit_templ_path, surf_path, with_rotation = False, treshold = 0.60):
+def findTemplate(templ_path, addit_templ_path, surf_path, with_rotation = False, treshold = 0.80):
     tresh = treshold
     
     img_rgb = cv2.imread(surf_path)
@@ -21,7 +21,7 @@ def findTemplate(templ_path, addit_templ_path, surf_path, with_rotation = False,
         template_flip = cv2.flip(template, 0)
         resFlip = cv2.matchTemplate(img_gray, template_flip, cv2.TM_CCOEFF_NORMED)
 
-    res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
+    res = cv2.matchTemplate(img_gray, template, cv2.TM_SQDIFF_NORMED) #TM_CCOEFF_NORMED
     
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
     print("min_val: " + str(min_val) + "; max_val" + str(max_val) + "; min loc:" + str(min_loc) + "; max loc:" + str(max_loc))
@@ -29,6 +29,7 @@ def findTemplate(templ_path, addit_templ_path, surf_path, with_rotation = False,
     # Calculate the similarity percentage of the matched template image
     # 
     # if max_val >= threshold:
+    
     similarity = round(max_val * 100, 2)  
     print("best similarity: " + str(similarity))  
     

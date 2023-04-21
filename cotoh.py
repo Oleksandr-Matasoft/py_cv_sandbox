@@ -59,7 +59,6 @@ input_image_surf = 'C:/Users/plus3/OneDrive/Desktop/cards/default/1440/cache/As.
 img_rgb, count = findTemplate(input_image_path, input_image_path2, input_image_surf, True)   
 
 
-
 cv2.imwrite('res.png',img_rgb)
 cv2.imshow('contoh.jpg', img_rgb)
 cv2.waitKey(0) &0xFF
